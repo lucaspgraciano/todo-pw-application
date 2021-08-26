@@ -1,2 +1,2 @@
-# prog-web-todo
-Trabalho final da disciplina PROGRAMAÇÃO WEB
+# TODO APPLICATION
+Aplicacao web de lista de tarefas
