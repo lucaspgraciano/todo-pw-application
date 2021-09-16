@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.flex {
+	display: flex;
+}
+
+.flex-center {
+	align-items: center;
+	justify-content: center;
+}
+
+.flex-align {
+	justify-content: center;
+}
+
+.flex-middle {
+	align-items: center;
+}
+
+.flex-vertical {
+	flex-direction: column;
+}
+
+.flex-inline {
+	display: inline-flex;
+}
+
+.round-border {
+	border-style: solid;
+	border-color: gray;
+	border-width: 1px;
+	border-radius: 5px;
+}
+
+.fullwindow {
+	width:100%;
+	height:100vh;
+}
+
+.fullheight {
+	height:100%;
+}
+
+#header {
+	width: 100%;
+	height: 8vh;
+	background-color: lightgray;
+	position: relative;
+}
+
+/*#header > div:nth-child(1) {
+	width:100px;
+}*/
+
+
+#pesquisacontainer {
+	height:100%;
+	/*width:290px;*/
+	display: inline-flex;
+	flex-direction: column;
+}
+
+#pesquisa {
+	margin-left: 3vw;
+	font-size: 1.5rem;
+	border-radius: 5px;
+	border-color: gray;
+	margin-top: auto;
+	margin-bottom: auto;
+	flex-grow: 0;
+}
+
+#usercontainerpai {
+	float:right;
+	height:100%;
+}
+
+#usercontainer {
+	background-color: gray;
+}
+
+#useravatar {
+	float: left;
+}
+
+#userlogout {
+	float:right;
+}
+
+
