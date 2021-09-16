@@ -44,10 +44,35 @@
 	height:100%;
 }
 
+.circle-cross {
+	display:inline-block;
+	width:50px;
+	height:50px;
+
+	background:
+	linear-gradient(var(--cross),var(--cross)),
+	linear-gradient(var(--cross),var(--cross)),
+	var(--crossbg);
+	background-position:center;
+	background-size: 50% 2px,2px 50%; /*thickness = 2px, length = 50% (25px)*/
+	background-repeat:no-repeat;
+	border-radius:50%;
+}
+
+:root {
+	--headerbg: lightgray;
+	--userareabg: gray;
+	--userlogoutbg: lightgray;
+	--userlogoutarrow: white;
+	--crossbg: white;
+	--cross: black;
+	--addtaskbtnbg: lightgray;
+}
+
 #header {
 	width: 100%;
 	height: 8vh;
-	background-color: lightgray;
+	background-color: var(--headerbg);
 	position: relative;
 }
 
@@ -79,15 +104,57 @@
 }
 
 #usercontainer {
-	background-color: gray;
+	background-color: var(--userareabg);
 }
 
 #useravatar {
 	float: left;
 }
 
-#userlogout {
-	float:right;
+#userinfocontainer {
+	margin-right: 6px;
+	margin-left: 3px;
 }
 
+#userlogoutcontainerpai {
+	float:right;
+	width:21px;
+	height:7vh;
+}
+
+#userlogoutcontainer {
+	background-color: var(--userlogoutbg);
+	border-radius:5px;
+}
+
+#userlogout {
+  width: 0; 
+  height: 0; 
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  
+  border-left: 15px solid var(--userlogoutarrow);
+  margin-left: 5px;
+  margin-right: 1px;
+  margin:top: 1px;
+  margin-bottom: 1px;
+}
+
+#taskslist {
+	list-style-type: none;
+}
+
+#taskslist > li{
+	margin-top: 6vh;
+	margin-left: 6vw;
+	width:29vw;
+}
+
+#taskslist > li > *{
+	width:100%;
+}
+
+#addtaskbtn {
+	background-color: var(--addtaskbtnbg);
+}
 
