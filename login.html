@@ -8,26 +8,21 @@
         <title>LOGIN</title>
     </head>
     <body>
-        <header>
-            <h1>Autenticar-se</h1>
-        </header>
-        <main class="main-card">
-            <form class="form-login">
-                <div class="label-email">
-                    <label>E-mail</label>
-                    <input type="text" placeholder="exemplo@email.com"/>
+        <div class="container">
+            <main class="login_form">
+                <p class="main-title">Autenticar-se</p>
+                <form class="main-login_form">
+                        <p>E-mail</p>
+                        <input type="text" placeholder="exemplo@email.com"/>
+                        <p>Senha</p>
+                        <input type="password" placeholder="********">
+                        <br>
+                        <button>Entrar</button>
+                </form>
+                <div class="main-login_register_link">
+                    <p>Não tem cadastro? <a href="register.html">Cadastre-se</a></p>
                 </div>
-                <div class="label-password">
-                    <label>Senha</label>
-                    <input type="password" placeholder="********">
-                </div>
-                <div class="label-button">
-                    <button>Entrar</button>
-                </div>
-                <div>
-                    <p>Não tem cadastro? </p><a href="register.html">Cadastre-se</a>
-                </div>
-            </form>
-        </main>
+            </main>
+        </div>
     </body>
 </html>
