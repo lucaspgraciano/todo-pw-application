@@ -1,0 +1,182 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    background-color: #f8f9fa;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+}
+.container{
+	height: 100%;
+}
+.top-bar{
+	background-color: #5433FF;
+	display: flex;
+	justify-content: space-between;
+	height: 7.5%;
+}
+.top-bar-search_bar{
+	background-color: #2D9BFF;
+	border-radius: 0 15px 15px 0;
+	display: flex;
+	margin: 15px 0;
+	padding: 10px;
+}
+.top-bar-search_bar input{
+	height: 100%;
+	width: 300px;
+	border: none;
+	border-radius: 15px 0 0 15px;
+	padding-left: 10px;
+	transition: 0.5s;
+	font-size: 1.4em;
+	outline: none;
+}
+.top-bar-search_bar button{
+	cursor: pointer;
+	background-color: white;
+	height: calc(100% + 2px);
+	border: none;
+	border-radius: 0 15px 15px 0;
+	padding: 0 10px;
+	transition: 0.5s;
+	width: 40px;
+}
+.top-bar-search_bar button img:hover{
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+.top-bar-search_bar button img:active{
+	transform: scale(0.9, 0.9);
+	width: 20px;
+	transition: 0.1s;
+}
+.top-bar-search_bar button img{
+	width: 100%;
+}
+.top-bar-user_card-container{
+	margin: 15px 0;
+	padding: 10px;
+	background-color: #2D9BFF;
+	display: flex;
+	border-radius: 15px 0 0 15px;
+	padding: 10px;
+}
+.top-bar-user_card-container button{
+	cursor: pointer;
+	border: none;
+	background-color: white;
+	border-radius: 5px;	
+	padding: 0 15px;
+}
+.top-bar-user_card-container button:hover{
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+.top-bar-user_card-container button:active{
+	transform: scale(0.9, 0.9);
+	transition: 0.1s;
+}
+.top-bar-user_card_img{
+	background-color: white;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+.top-bar-user_card_img img{
+	width: 100%;
+}
+.top-bar-user_card_info{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+.top-bar-user_card_info p{
+	margin:0 15px;
+	color: white;
+	font-size: 1.em;
+}
+.top-bar-user_card_info hr{
+	width: 80%;
+	border:1px solid #5433FF;
+	border-radius: 15px;
+}
+.main-content{
+	padding:0 50px;
+	height: calc(100vh - 112px);
+}
+.main-content-list{
+	display: flex;
+}
+.main-content-list div{
+	width: 33%;
+	height: 100%;
+	background-color: #1cc6ff;
+	border-radius: 0 0 15px 15px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+}
+.main-content-list_list{
+	margin-right: 100px;
+	justify-content: row;
+
+}
+.main-content-list_list div{
+	background-color: lightblue;
+	justify-content: center;
+	border-radius: 15px;
+	width: 90%;
+}
+.main-content-list_list div span h1{
+	font-size: 2em;
+	text-align: center;
+}
+.main-content-list_list div span p{
+	font-size: 1.5em;
+	margin-left: 15px;
+}
+.main-content-list_list div span hr{
+	border: 1px solid white;
+	width: 95%;
+}
+.main-content-list_list div span button{
+	cursor: pointer;
+	border: none;
+	background-color: white;
+	width: 54px;
+	border-radius: 50%;
+	justify-content: center;
+	margin: auto 45%;
+	font-size: 3em;
+	transition: 0.3s;
+}
+.main-content-list_list div span button:hover{
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+.main-content-list_list div span button:active{
+	transform: scale(0.9, 0.9);
+	transition: 0.3s;
+}
+.main-content-list_new-list button{
+	cursor: pointer;
+	background-color: #1cc6ff;
+	border: none;
+	border-radius: 15px;
+	height: 100px;
+}
+.main-content-list_new-list button p{
+	font-size: 2em;
+	color: white;
+	font-weight: bold;
+	transition: 0.9s;
+}
+.main-content-list_new-list button p:hover{
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+.main-content-list_new-list button p:active{
+	transform: scale(0.9, 0.9);
+	transition: 0.3s;
+}
