@@ -5,10 +5,12 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="../../../publico/estilo/home.css" rel="stylesheet">
+		<script src="../../../publico/js/home.js"></script>
 		<title>HOME</title>
 	</head>
 	<body>
 		<div class="container">
+			<div class="top-bar-pai">
 			<header class="top-bar">
 				<section class="top-bar-search_bar">
 					<input type="text" placeholder="Buscar...">
@@ -28,10 +30,11 @@
 				</form>
 				</section>
 			</header>
+			</div>
 			<main class="main-content">
-				<section class="main-content-list">
+				<section id="Listas" class="main-content-list">
 					<div class="main-content-list_list">
-						<div>
+						<div id="ListaA">
 							<span>
 								<h1>Título da Lista A</h1>
 							</span>
@@ -43,12 +46,12 @@
 								<p>Tarefa A.3</p>
 							</span>
 							<span>
-								<button>+</button>
+								<button onclick="AddTarefa('A')">+</button>
 							</span>
 						</div>
 					</div>
 					<div class="main-content-list_list">
-						<div>
+						<div id="ListaB">
 							<span>
 								<h1>Título da Lista B</h1>
 							</span>
@@ -60,12 +63,15 @@
 								<p>Tarefa B.3</p>
 							</span>
 							<span>
-								<button>+</button>
+								<button onclick="AddTarefa('B')">+</button>
 							</span>
 						</div>
 					</div>
 					<div class="main-content-list_new-list">
-						<button><p>NOVA LISTA DE TAREFAS</p></button>
+						<button onclick="ShowCriarLista(true)"><p>NOVA LISTA DE TAREFAS</p></button>
+						<input class="hidden">
+						<button class="hidden" onclick="AddLista()">Ok</button>
+						<button class="hidden" onclick="ShowCriarLista(false)">Cancelar</button>
 					</div>
 				</section>
 			</main>
