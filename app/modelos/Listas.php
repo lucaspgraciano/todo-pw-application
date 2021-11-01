@@ -17,10 +17,6 @@ class Lista {
         return $this->$campo = $valor;
     }
 
-    public function igual(string $titulo, string $email) {
-        return $this->titulo === $titulo && $this->email === $email;
-    }
-
     public function salvarLista() {
         $con = Database::getConnection();
 
