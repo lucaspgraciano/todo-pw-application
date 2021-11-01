@@ -9,9 +9,9 @@ Database::createSchema();
 
 use Steampixel\Route;
 
-
 $controller = new LoginController();
 
+Route::add('/', fn () => $controller->loginIndex(), ['get']);
 Route::add('/login', fn () => $controller->loginIndex(), ['get']);
 Route::add('/register', fn () => $controller->cadastrarIndex(), ['get']);
 Route::add('/user/home', fn () => $controller->home(), ['get']);
