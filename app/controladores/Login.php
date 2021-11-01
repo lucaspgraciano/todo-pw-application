@@ -3,7 +3,7 @@
 require 'app/modelos/Usuarios.php';
 require 'Controlador.php';
 
-class LoginController extends Controller{
+class LoginController extends Controller {
     private $loggedUser;
 
     function __construct() {
@@ -49,11 +49,10 @@ class LoginController extends Controller{
             header('Location: /login?acao=entrar&mensagem=Você precisa se identificar primeiro');
             return;
         }
-        $this->view('users/info', $this->loggedUser);
+        $this->view('user/home', $this->loggedUser);
     }
 
-    public function sair()
-    {
+    public function sair() {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
@@ -61,5 +60,4 @@ class LoginController extends Controller{
         unset($_SESSION['user']);
         header('Location: /login?mensagem=Usuário deslogado com sucesso!');
     }
-
 }

@@ -12,6 +12,7 @@
             <main class="login_form">
                 <p class="main-title">Cadastrar-se</p>
                 <form class="main-login_form" method="POST">
+                        <?php require 'app/visoes/alert.php' ?>
                         <p for="name">Primeiro Nome</p>
                         <input type="text" id="name" name="nome" placeholder="exemplo" required>
                         <p for="email">E-mail</p>

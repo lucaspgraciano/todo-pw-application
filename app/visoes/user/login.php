@@ -12,6 +12,7 @@
             <main class="login_form">
                 <p class="main-title">Autenticar-se</p>
                 <form class="main-login_form" method="POST">
+                        <?php require 'app/visoes/alert.php' ?>
                         <p for="email">E-mail</p>
                         <input type="email" id="email" name="email" placeholder="exemplo@email.com"/>
                         <p for="senhea">Senha</p>

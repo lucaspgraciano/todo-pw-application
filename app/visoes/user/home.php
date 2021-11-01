@@ -15,15 +15,17 @@
 					<button><img src="../../../publico/imagens/loupe.png"></button>
 				</section>
 				<section>
+				<form method="POST" action="/logout">
 					<div class="top-bar-user_card-container">
 						<div class="top-bar-user_card_img"><img src=".../../../publico/imagens/user.png"></div>
 						<div class="top-bar-user_card_info">
-							<p>Usuário</p>
+							<p><?= $data->nome ?></p>
 							<hr>
-							<p>exemplo@email.com</p>
+							<p><?= $data->email ?></p>
 						</div>
-						<button><a href="login.html"><img src="../../../publico/imagens/exit.png"></a></button>
+						<button type="submit"><img src="../../../publico/imagens/exit.png"></button>
 					</div>
+				</form>
 				</section>
 			</header>
 			<main class="main-content">
