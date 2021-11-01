@@ -20,8 +20,9 @@ class Database {
                 senha TEXT NOT NULL
             );
             CREATE TABLE IF NOT EXISTS Listas (
-                titulo TEXT PRIMARY KEY NOT NULL,
-                email TEXT
+                titulo TEXT NOT NULL,
+                email TEXT NOT NULL,
+                PRIMARY KEY(titulo, email)
             );
             CREATE TABLE IF NOT EXISTS Tarefas (
                 conteudo TEXT NOT NULL,
