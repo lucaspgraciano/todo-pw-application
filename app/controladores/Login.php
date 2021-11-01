@@ -2,6 +2,7 @@
 
 require 'app/modelos/Usuarios.php';
 require 'Controlador.php';
+require 'app/modelos/Listas.php';
 
 class LoginController extends Controller {
     private $loggedUser;
@@ -59,5 +60,19 @@ class LoginController extends Controller {
         }
         unset($_SESSION['user']);
         header('Location: /login?mensagem=Usuário deslogado com sucesso!');
+    }
+
+    public function CriarLista() {
+        if (!$this->loggedUser) {
+            header('Location: /login?mensagem=Você precisa se identificar primeiro');
+            return;
+        }
+        if (!Lista::buscarLista($_POST['nome'], $this->loggedUser->email)) {
+            header('Location: /user/home?mensagem="Lista já existe');
+            return;
+        }
+        echo('sucesso');
+        $lista = new Lista($POST['nome'], $this->loggedUser->email);
+        $lista->salvarLista();
     }
 }

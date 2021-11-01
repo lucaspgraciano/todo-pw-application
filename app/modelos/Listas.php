@@ -47,7 +47,7 @@ class Lista {
 
     }
 
-    public function buscarLista($titulo, $email) {
+    public static function buscarLista($titulo, $email) {
         $con = Database::getConnection();
 
         $stm = $con->prepare('SELECT titulo, email FROM Lista WHERE titulo = :titulo AND email = :email');

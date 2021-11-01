@@ -19,6 +19,7 @@ Route::add('/user/home', fn () => $controller->home(), ['get']);
 Route::add('/login', fn ()  => $controller->login(), ['post']);
 Route::add('/register', fn ()  => $controller->cadastrar(), ['post']);
 Route::add('/logout', fn () => $controller->sair(), ['post']);
+Route::add('/user/home/new list', fn () => $controller->CriarLista(), ['post']);
 
 Route::add('/*', function () {
     http_response_code(404);
