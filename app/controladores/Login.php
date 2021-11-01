@@ -39,7 +39,7 @@ class LoginController extends Controller {
             $user = new Usuario($_POST['email'], $_POST['senha'], $_POST['nome']);
             $user->salvar();
             header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário cadastrado com sucesso!');
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             header('Location: /register?email=' . $_POST['email'] . '&mensagem=Email já cadastrado!');
         }
     }

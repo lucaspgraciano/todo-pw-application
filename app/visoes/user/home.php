@@ -33,40 +33,6 @@
 			</div>
 			<main class="main-content">
 				<section id="Listas" class="main-content-list">
-					<div class="main-content-list_list">
-						<div id="ListaA">
-							<span>
-								<h1>Título da Lista A</h1>
-							</span>
-							<span>
-								<p>Tarefa A.1</p>
-								<hr>
-								<p>Tarefa A.2</p>
-								<hr>
-								<p>Tarefa A.3</p>
-							</span>
-							<span>
-								<button onclick="AddTarefa('A')">+</button>
-							</span>
-						</div>
-					</div>
-					<div class="main-content-list_list">
-						<div id="ListaB">
-							<span>
-								<h1>Título da Lista B</h1>
-							</span>
-							<span>
-								<p>Tarefa B.1</p>
-								<hr>
-								<p>Tarefa B.2</p>
-								<hr>
-								<p>Tarefa B.3</p>
-							</span>
-							<span>
-								<button onclick="AddTarefa('B')">+</button>
-							</span>
-						</div>
-					</div>
 					<div class="main-content-list_new-list">
 						<button onclick="ShowCriarLista(true)"><p>NOVA LISTA DE TAREFAS</p></button>
 						<input class="hidden">
