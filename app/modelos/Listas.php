@@ -4,7 +4,7 @@ class Lista {
     private $titulo;
     private $email;
 
-    function __construct(string $titulo, string $email){
+    function __construct(string $titulo, string $email) {
         $this->titulo = $titulo;
         $this->email = $email;
     }
@@ -20,7 +20,7 @@ class Lista {
     public function salvarLista() {
         $con = Database::getConnection();
 
-        $stm = $con->prepare('INSERT INTO Lista (titulo, email) VALUES (:titulo, :email)');
+        $stm = $con->prepare('INSERT INTO Listas (titulo, email) VALUES (:titulo, :email)');
         $stm->bindValue(':titulo', $this->titulo);
         $stm->bindValue(':email', $this->email);
         $stm->execute();
@@ -29,7 +29,7 @@ class Lista {
     public function buscarListaPorUsuario($email) {
         $con = Database::getConnection();
 
-        $stm = $con->prepare('SELECT titulo, email FROM Lista WHERE email = :email');
+        $stm = $con->prepare('SELECT titulo, email FROM Listas WHERE email = :email');
         $stm->bindValue(':email', $email);
         $stm->execute();
         $resultado = $stm->fetchAll();
@@ -50,7 +50,7 @@ class Lista {
     public static function buscarLista($titulo, $email) {
         $con = Database::getConnection();
 
-        $stm = $con->prepare('SELECT titulo, email FROM Lista WHERE titulo = :titulo AND email = :email');
+        $stm = $con->prepare('SELECT titulo, email FROM Listas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
         $stm->execute();
@@ -67,7 +67,7 @@ class Lista {
     public function apagarLista($titulo, $email) {
         $con = Database::getConnection();
 
-        $stm = $con->perpare('DELETE FROM Lista WHERE titulo = :titulo AND email = :email');
+        $stm = $con->perpare('DELETE FROM Listas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
         $stm->execute();

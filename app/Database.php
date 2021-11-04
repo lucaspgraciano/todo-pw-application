@@ -19,14 +19,16 @@ class Database {
                 email TEXT PRIMARY KEY NOT NULL,
                 senha TEXT NOT NULL
             );
-            CREATE TABLE IF NOT EXISTS Lista (
+            CREATE TABLE IF NOT EXISTS Listas (
                 titulo TEXT NOT NULL,
                 email TEXT NOT NULL,
                 PRIMARY KEY(titulo, email)
             );
             CREATE TABLE IF NOT EXISTS Tarefas (
                 conteudo TEXT NOT NULL,
-                titulo TEXT NOT NULL
+                titulo TEXT NOT NULL,
+                email TEXT NOT NULL,
+                PRIMARY KEY(conteudo, titulo, email)
             );
         ');
     }

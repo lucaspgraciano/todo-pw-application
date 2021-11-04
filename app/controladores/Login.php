@@ -62,17 +62,17 @@ class LoginController extends Controller {
         header('Location: /login?mensagem=Usuário deslogado com sucesso!');
     }
 
-    public function CriarLista() {
+    public function criarLista() {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
         }
-        if (!Lista::buscarLista($_POST['nome'], $this->loggedUser->email)) {
+        if (!Lista::buscarLista($_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem="Lista já existe');
             return;
         }
         echo('sucesso');
-        $lista = new Lista($POST['nome'], $this->loggedUser->email);
+        $lista = new Lista($_POST['titulo'], $this->loggedUser->email);
         $lista->salvarLista();
     }
 }
