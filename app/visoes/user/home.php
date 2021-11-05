@@ -9,7 +9,6 @@
 		<title>HOME</title>
 	</head>
 	<body>
-		<!-- TODO: Fazer um alert.php e inserir nesta view -->
 		<div class="container">
 			<div class="top-bar-pai">
 			<header class="top-bar">
@@ -17,6 +16,7 @@
 					<input type="text" placeholder="Buscar...">
 					<button><img src="../../../publico/imagens/loupe.png"></button>
 				</section>
+				<section class="top-bar-alert"><?php require 'app/visoes/alert.php' ?></section>
 				<section>
 				<form method="POST" action="/logout">
 					<div class="top-bar-user_card-container">
