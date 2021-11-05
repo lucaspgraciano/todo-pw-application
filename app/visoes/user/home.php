@@ -47,20 +47,27 @@
 							<div class="main-content-list_list">
 								<div>
 									<form action="/user/home/remove_list" method="POST">
-										<h1><?= $lista->titulo ?></h1>
 										<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
 										<button type="submit"> APAGAR LISTA </button>
+										<h1><?= $lista->titulo ?></h1>	
 									</form>
 									<?php if (is_null($data[2]) || count($data[2]) === 0) { ?>
 									<?php } else {
 										foreach ($data[2] as $tarefa) { 
 											if ($tarefa->titulo == $lista->titulo) { ?>
-												<form action="/user/home/remove_task" method="POST">
-													<h1><?= $tarefa->conteudo ?></h1>
-													<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
-													<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
-													<button type="submit"> APAGAR TAREFA </button>
-												</form>
+												<strong><?= $tarefa->conteudo ?></strong><p><?= $tarefa->estado ?></p>
+													
+													<form action="/user/home/remove_task" method="POST">
+														<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
+														<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
+														<button type="submit"> APAGAR TAREFA </button>
+													</form>
+													<form action="/user/home/update_task" method="POST">
+														<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
+														<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
+														<input name="estado" id="estado" type="hidden" value="<?= $tarefa->estado ?>">
+														<button type="submit"> ATUALIZAR TAREFA </button>
+													</form>
 											<?php } else { ?>
 											<?php } ?>
 										<?php } ?>

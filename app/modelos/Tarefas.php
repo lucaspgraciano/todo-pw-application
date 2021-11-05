@@ -4,11 +4,13 @@ class Tarefa {
     private $conteudo;
     private $titulo;
     private $email;
+    private $estado;
 
-    function __construct(string $conteudo, string $titulo, string $email) {
+    function __construct(string $conteudo, string $titulo, string $email, string $estado = "Em andamento") {
         $this->conteudo = $conteudo;
         $this->titulo = $titulo;
         $this->email = $email;
+        $this->estado = $estado;
     }
 
     public function __get($campo) {
@@ -21,16 +23,17 @@ class Tarefa {
 
     public function salvarNovaTarefa() {
         $con = Database::getConnection();
-        $stm = $con->prepare('INSERT INTO Tarefas (conteudo, titulo, email) VALUES (:conteudo, :titulo, :email)');
+        $stm = $con->prepare('INSERT INTO Tarefas (conteudo, titulo, email, estado) VALUES (:conteudo, :titulo, :email, :estado)');
         $stm->bindValue(':conteudo', $this->conteudo);
         $stm->bindValue(':titulo', $this->titulo);
         $stm->bindValue(':email', $this->email);
+        $stm->bindValue(':estado', $this->estado);
         $stm->execute();
     }
 
     public static function buscarTarefasPorUsuario($email) {
         $con = Database::getConnection();
-        $stm = $con->prepare('SELECT conteudo, titulo, email FROM Tarefas WHERE email = :email');
+        $stm = $con->prepare('SELECT conteudo, titulo, email, estado FROM Tarefas WHERE email = :email');
         $stm->bindValue(':email', $email);
         $stm->execute();
         $resultado = $stm->fetchAll();
@@ -38,7 +41,7 @@ class Tarefa {
         if ($resultado) {
             $tarefas = array();
             foreach ($resultado as $item) {
-                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email']);
+                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
                 array_push($tarefas, $tarefa);
             }
             return $tarefas;
@@ -49,7 +52,7 @@ class Tarefa {
 
     public static function buscarTarefaPorTituloUsuario($titulo, $email){
         $con = Database::getConnection();
-        $stm = $con->prepare('SELECT conteudo, titulo, email FROM Tarefas WHERE titulo = :titulo AND email = :email');
+        $stm = $con->prepare('SELECT conteudo, titulo, email, estado FROM Tarefas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
         $stm->execute();
@@ -58,7 +61,7 @@ class Tarefa {
         if ($resultado) {
             $tarefas = array();
             foreach ($resultado as $item) {
-                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email']);
+                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
                 array_push($tarefas, $tarefa);
             }
             return $tarefas;
@@ -69,7 +72,7 @@ class Tarefa {
 
     public static function buscarTarefaEspecifica($conteudo, $titulo, $email) {
         $con = Database::getConnection();
-        $stm = $con->prepare('SELECT conteudo, titulo, email FROM Tarefas WHERE conteudo = :conteudo AND titulo = :titulo AND email = :email');
+        $stm = $con->prepare('SELECT conteudo, titulo, email, estado FROM Tarefas WHERE conteudo = :conteudo AND titulo = :titulo AND email = :email');
         $stm->bindValue(':conteudo', $conteudo);
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
@@ -77,7 +80,7 @@ class Tarefa {
         $resultado = $stm->fetch();
 
         if ($resultado) {
-            $tarefa = new Tarefa($resultado['conteudo'], $resultado['titulo'], $resultado['email']);
+            $tarefa = new Tarefa($resultado['conteudo'], $resultado['titulo'], $resultado['email'], $resultado['estado']);
             return $tarefa;
         } else {
             return NULL;
@@ -98,6 +101,22 @@ class Tarefa {
         $stm = $con->prepare('DELETE FROM Tarefas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
+        $stm->execute();
+    }
+
+    public static function atualizarEstadoDaTarefa($conteudo, $titulo, $email, $estado) {
+        $con = Database::getConnection();
+        $novo_estado = NULL;
+        if ($estado == "Em andamento") {
+            $novo_estado = "Concluída";
+        } else {
+            $novo_estado = "Em andamento";
+        }
+        $stm = $con->prepare('UPDATE Tarefas SET estado = :estado WHERE conteudo = :conteudo AND titulo = :titulo AND email = :email');
+        $stm->bindValue(':conteudo', $conteudo);
+        $stm->bindValue(':titulo', $titulo);
+        $stm->bindValue(':email', $email);
+        $stm->bindValue(':estado', $novo_estado);
         $stm->execute();
     }
 }

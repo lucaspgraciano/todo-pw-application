@@ -63,12 +63,6 @@ class LoginController extends Controller {
             $listas = array_reverse($listas);
             array_push($data,$this->loggedUser, $listas, $tarefas);
         }
-        // if (is_null($listas)) {
-        //     array_push($data, $this->loggedUser);
-        // } else {
-        //     $listas = array_reverse($listas);
-        //     array_push($data,$this->loggedUser, $listas);
-        // }
         $this->view('user/home', $data);
     }
 
@@ -95,10 +89,6 @@ class LoginController extends Controller {
     }
 
     public function removerLista() {
-        // TODO: Ao finalizar os métodos de manipiulacao de tarefas, deve-se
-        // inserir neste método (removerLista()) as instrucoes para apagar as
-        // tarefas referentes a lista
-
         $lista = Lista::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email);
         try {
             $lista->apagarLista($_POST['titulo'], $this->loggedUser->email);
@@ -128,6 +118,16 @@ class LoginController extends Controller {
             header('Location: /user/home?mensagem=Tarefa deletada com sucesso!');
         } catch (PDOException $error) {
             header('Location: /user/home?mensagem=Erro ao deletar a tarefa' . $_POST['conteudo'] . '!');
+        }
+    }
+
+    public function atualizarTarefa() {
+        var_dump($_POST);
+        try {
+            Tarefa::atualizarEstadoDaTarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email, $_POST['estado']);
+            header('Location: /user/home?mensagem=Tarefa atualizada com sucesso!');
+        } catch (PDOException $error) {
+            header('Location: /user/home?mensagem=Erro ao atualizar a tarefa '. $_POST['conteudo'] . '!');
         }
     }
 }
