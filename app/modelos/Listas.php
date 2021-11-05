@@ -13,13 +13,12 @@ class Lista {
         return $this->$campo;
     }
 
-    public function __set($campo, $valor){
+    public function __set($campo, $valor) {
         return $this->$campo = $valor;
     }
 
-    public function salvarLista() {
+    public function salvarNovaLista() {
         $con = Database::getConnection();
-
         $stm = $con->prepare('INSERT INTO Listas (titulo, email) VALUES (:titulo, :email)');
         $stm->bindValue(':titulo', $this->titulo);
         $stm->bindValue(':email', $this->email);
@@ -28,7 +27,6 @@ class Lista {
 
     public static function buscarListaPorUsuario($email) {
         $con = Database::getConnection();
-
         $stm = $con->prepare('SELECT titulo, email FROM Listas WHERE email = :email');
         $stm->bindValue(':email', $email);
         $stm->execute();
@@ -44,12 +42,10 @@ class Lista {
         } else {
             return NULL;
         }
-
     }
 
-    public static function buscarLista($titulo, $email) {
+    public static function buscarListaEspecifica($titulo, $email) {
         $con = Database::getConnection();
-
         $stm = $con->prepare('SELECT titulo, email FROM Listas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
@@ -66,7 +62,6 @@ class Lista {
 
     public function apagarLista($titulo, $email) {
         $con = Database::getConnection();
-
         $stm = $con->prepare('DELETE FROM Listas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);

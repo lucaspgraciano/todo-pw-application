@@ -3,6 +3,7 @@
 require 'app/modelos/Usuarios.php';
 require 'Controlador.php';
 require 'app/modelos/Listas.php';
+require 'app/modelos/Tarefas.php';
 
 class LoginController extends Controller {
     private $loggedUser;
@@ -52,13 +53,22 @@ class LoginController extends Controller {
         }
         $data = array();
         $listas = Lista::buscarListaPorUsuario($this->loggedUser->email);
-        if (is_null($listas)) {
+        $tarefas = Tarefa::buscarTarefasPorUsuario($this->loggedUser->email);
+        if (is_null($listas) && is_null($tarefas)) {
             array_push($data, $this->loggedUser);
-        } else {
+        } else if (!is_null($listas) && is_null($tarefas)) {
             $listas = array_reverse($listas);
             array_push($data,$this->loggedUser, $listas);
+        } else {
+            $listas = array_reverse($listas);
+            array_push($data,$this->loggedUser, $listas, $tarefas);
         }
-
+        // if (is_null($listas)) {
+        //     array_push($data, $this->loggedUser);
+        // } else {
+        //     $listas = array_reverse($listas);
+        //     array_push($data,$this->loggedUser, $listas);
+        // }
         $this->view('user/home', $data);
     }
 
@@ -75,12 +85,11 @@ class LoginController extends Controller {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
-        } else if (Lista::buscarLista($_POST['titulo'], $this->loggedUser->email)) {
+        } else if (Lista::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem="Lista já existe');
-            return;
         } else {
             $lista = new Lista($_POST['titulo'], $this->loggedUser->email);
-            $lista->salvarLista();
+            $lista->salvarNovaLista();
             header('Location: /user/home');
         }
     }
@@ -90,12 +99,35 @@ class LoginController extends Controller {
         // inserir neste método (removerLista()) as instrucoes para apagar as
         // tarefas referentes a lista
 
-        $lista = Lista::buscarLista($_POST['titulo'], $this->loggedUser->email);
+        $lista = Lista::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email);
         try {
             $lista->apagarLista($_POST['titulo'], $this->loggedUser->email);
+            Tarefa::apagarTarefasPorLista($_POST['titulo'], $this->loggedUser->email);
             header('Location: /user/home?mensagem=Lista deletada com sucesso!');
         } catch (PDOException $erro) {
-            header('Location: /user/home?mensagem=Erro ao deletar '. $_POST['titulo'] . '!');
+            header('Location: /user/home?mensagem=Erro ao deletar a lista'. $_POST['titulo'] . '!');
+        }
+    }
+
+    public function criarTarefa() {
+        if (!$this->loggedUser) {
+            header('Location: /login?mensagem=Você precisa se identificar primeiro');
+        } else if (Tarefa::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email)) {
+            header('Location: /user/home?mensagem=A tarefa' . $_POST['conteudo'] . 'já está cadastrada na lista' . $_POST['titulo'] . '.');
+        } else {
+            $tarefa = new Tarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+            $tarefa->salvarNovaTarefa();
+            header('Location: /user/home');
+        }
+    }
+
+    public function removerTarefa() {
+        $tarefa = Tarefa::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+        try {
+            $tarefa->apagarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+            header('Location: /user/home?mensagem=Tarefa deletada com sucesso!');
+        } catch (PDOException $error) {
+            header('Location: /user/home?mensagem=Erro ao deletar a tarefa' . $_POST['conteudo'] . '!');
         }
     }
 }

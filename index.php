@@ -21,6 +21,8 @@ Route::add('/register', fn ()  => $controller->cadastrar(), ['post']);
 Route::add('/logout', fn () => $controller->sair(), ['post']);
 Route::add('/user/home/new_list', fn () => $controller->criarLista(), ['post']);
 Route::add('/user/home/remove_list', fn () => $controller->removerLista(), ['post']);
+Route::add('/user/home/add_task', fn () => $controller->criarTarefa(), ['post']);
+Route::add('/user/home/remove_task', fn () => $controller->removerTarefa(), ['post']);
 
 Route::add('/*', function () {
     http_response_code(404);

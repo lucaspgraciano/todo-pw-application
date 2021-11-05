@@ -126,6 +126,7 @@ html, body{
 	flex-direction: column;
 	flex-shrink: 0;
 }
+
 .main-content-list_list{
 	margin-right: 100px;
 	justify-content: row;
@@ -137,59 +138,6 @@ html, body{
 	border-radius: 15px;
 	width: 90%;
 }
-.main-content-list_list div form h1{
-	font-size: 2em;
-	text-align: center;
-}
-.main-content-list_list div form p{
-	font-size: 1.5em;
-	margin-left: 15px;
-}
-.main-content-list_list div form hr{
-	border: 1px solid white;
-	width: 95%;
-}
-.main-content-list_list div form button{
-	cursor: pointer;
-	border: none;
-	background-color: white;
-	width: 54px;
-	border-radius: 50%;
-	justify-content: center;
-	margin: auto 45%;
-	font-size: 3em;
-	transition: 0.3s;
-}
-.main-content-list_list div form button:hover{
-	transform: scale(1.1, 1.1);
-	transition: 0.5s;
-}
-.main-content-list_list div form button:active{
-	transform: scale(0.9, 0.9);
-	transition: 0.3s;
-}
-.main-content-list_new-list button{
-	cursor: pointer;
-	background-color: #1cc6ff;
-	border: none;
-	border-radius: 15px;
-	height: 100px;
-}
-.main-content-list_new-list button p{
-	font-size: 2em;
-	color: white;
-	font-weight: bold;
-	transition: 0.9s;
-}
-.main-content-list_new-list button p:hover{
-	transform: scale(1.1, 1.1);
-	transition: 0.5s;
-}
-.main-content-list_new-list button p:active{
-	transform: scale(0.9, 0.9);
-	transition: 0.3s;
-}
-
 .hidden {
 	display:none;
 }

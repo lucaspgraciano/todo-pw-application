@@ -35,14 +35,10 @@
 			<main class="main-content">
 				<section id="Listas" class="main-content-list">
 					<div class="main-content-list_list">
-						<!-- <button onclick="ShowCriarLista(true)"><p>NOVA LISTA DE TAREFAS</p></button> -->
-						<!-- <input class="hidden">
-						<button class="hidden" onclick="AddLista()">Ok</button>
-						<button class="hidden" onclick="ShowCriarLista(false)">Cancelar</button> -->
 						<form action="/user/home/new_list" method="POST">
 							<label for="titulo">Título da Lista</label>
 							<input name="titulo" id="titulo" type="text" placeholder="Exemplo">
-							<button type="submit">Enviar</button>
+							<button type="submit">ADICIONAR LISTA</button>
 						</form>
 					</div>
 					<?php if (is_null($data[1]) || count($data[1]) === 0) { ?>
@@ -52,10 +48,30 @@
 								<div>
 									<form action="/user/home/remove_list" method="POST">
 										<h1><?= $lista->titulo ?></h1>
-										<input type="hidden" name="titulo" value="<?= $lista->titulo ?>">
-										<button type="submit"> X </button>
+										<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+										<button type="submit"> APAGAR LISTA </button>
 									</form>
+									<?php if (is_null($data[2]) || count($data[2]) === 0) { ?>
+									<?php } else {
+										foreach ($data[2] as $tarefa) { 
+											if ($tarefa->titulo == $lista->titulo) { ?>
+												<form action="/user/home/remove_task" method="POST">
+													<h1><?= $tarefa->conteudo ?></h1>
+													<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
+													<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
+													<button type="submit"> APAGAR TAREFA </button>
+												</form>
+											<?php } else { ?>
+											<?php } ?>
+										<?php } ?>
+									<?php } ?>
 								</div>
+								<form action="/user/home/add_task" method="POST">
+									<label for="conteudo"> Tarefa</label>
+									<input name="conteudo" id="conteudo" type="text" placeholder="Exemplo">
+									<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+									<button type="submit">ADICIONAR TAREFA</button>
+								</form>
 							</div>
 						<?php } ?>
 					<?php } ?>
