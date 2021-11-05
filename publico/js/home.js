@@ -41,7 +41,7 @@ function AddLista()
 	listas.insertBefore(listaout,listas.children[listas.children.length-1]);
 	ShowCriarLista(false);
 	UpdateBodyWidth();
-	var url =  window.location.origin + "/user/home/new list?nome=" + nome;
+	var url =  window.location.origin + "/user/home/new_list?nome=" + nome;
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url);
 

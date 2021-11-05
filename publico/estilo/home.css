@@ -117,7 +117,7 @@ html, body{
 	display: flex;
 }
 .main-content-list div{
-	width: 33%;
+	width: 27.5%;
 	height: 100%;
 	background-color: #1cc6ff;
 	border-radius: 0 0 15px 15px;
@@ -137,19 +137,19 @@ html, body{
 	border-radius: 15px;
 	width: 90%;
 }
-.main-content-list_list div span h1{
+.main-content-list_list div form h1{
 	font-size: 2em;
 	text-align: center;
 }
-.main-content-list_list div span p{
+.main-content-list_list div form p{
 	font-size: 1.5em;
 	margin-left: 15px;
 }
-.main-content-list_list div span hr{
+.main-content-list_list div form hr{
 	border: 1px solid white;
 	width: 95%;
 }
-.main-content-list_list div span button{
+.main-content-list_list div form button{
 	cursor: pointer;
 	border: none;
 	background-color: white;
@@ -160,11 +160,11 @@ html, body{
 	font-size: 3em;
 	transition: 0.3s;
 }
-.main-content-list_list div span button:hover{
+.main-content-list_list div form button:hover{
 	transform: scale(1.1, 1.1);
 	transition: 0.5s;
 }
-.main-content-list_list div span button:active{
+.main-content-list_list div form button:active{
 	transform: scale(0.9, 0.9);
 	transition: 0.3s;
 }

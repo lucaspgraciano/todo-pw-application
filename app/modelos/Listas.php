@@ -26,7 +26,7 @@ class Lista {
         $stm->execute();
     }
 
-    public function buscarListaPorUsuario($email) {
+    public static function buscarListaPorUsuario($email) {
         $con = Database::getConnection();
 
         $stm = $con->prepare('SELECT titulo, email FROM Listas WHERE email = :email');
@@ -67,7 +67,7 @@ class Lista {
     public function apagarLista($titulo, $email) {
         $con = Database::getConnection();
 
-        $stm = $con->perpare('DELETE FROM Listas WHERE titulo = :titulo AND email = :email');
+        $stm = $con->prepare('DELETE FROM Listas WHERE titulo = :titulo AND email = :email');
         $stm->bindValue(':titulo', $titulo);
         $stm->bindValue(':email', $email);
         $stm->execute();

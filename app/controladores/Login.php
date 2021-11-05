@@ -50,7 +50,16 @@ class LoginController extends Controller {
             header('Location: /login?acao=entrar&mensagem=Você precisa se identificar primeiro');
             return;
         }
-        $this->view('user/home', $this->loggedUser);
+        $data = array();
+        $listas = Lista::buscarListaPorUsuario($this->loggedUser->email);
+        if (is_null($listas)) {
+            array_push($data, $this->loggedUser);
+        } else {
+            $listas = array_reverse($listas);
+            array_push($data,$this->loggedUser, $listas);
+        }
+
+        $this->view('user/home', $data);
     }
 
     public function sair() {
@@ -66,13 +75,27 @@ class LoginController extends Controller {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
-        }
-        if (!Lista::buscarLista($_POST['titulo'], $this->loggedUser->email)) {
+        } else if (Lista::buscarLista($_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem="Lista já existe');
             return;
+        } else {
+            $lista = new Lista($_POST['titulo'], $this->loggedUser->email);
+            $lista->salvarLista();
+            header('Location: /user/home');
         }
-        echo('sucesso');
-        $lista = new Lista($_POST['titulo'], $this->loggedUser->email);
-        $lista->salvarLista();
+    }
+
+    public function removerLista() {
+        // TODO: Ao finalizar os métodos de manipiulacao de tarefas, deve-se
+        // inserir neste método (removerLista()) as instrucoes para apagar as
+        // tarefas referentes a lista
+
+        $lista = Lista::buscarLista($_POST['titulo'], $this->loggedUser->email);
+        try {
+            $lista->apagarLista($_POST['titulo'], $this->loggedUser->email);
+            header('Location: /user/home?mensagem=Lista deletada com sucesso!');
+        } catch (PDOException $erro) {
+            header('Location: /user/home?mensagem=Erro ao deletar '. $_POST['titulo'] . '!');
+        }
     }
 }
