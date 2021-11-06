@@ -1,6 +1,5 @@
-# TO-DO Application
-Aplicação web de lista de tarefas para a disciplina de Programação Web.
-Faculdade de Computação da Universidade Federal do Mato Grosso do Sul.
+# To-do Application
+Trabalho final da disciplina de Programação Web.
 
 ### Integrantes do grupo
 - Everton 
@@ -8,3 +7,5 @@ Faculdade de Computação da Universidade Federal do Mato Grosso do Sul.
 - Lucas
 - Milena
 - Paola
+
+### FACOM UFMS
