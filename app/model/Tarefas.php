@@ -1,6 +1,6 @@
 <?php
 
-class Tarefa {
+class Tarefas {
     private $conteudo;
     private $titulo;
     private $email;
@@ -41,7 +41,7 @@ class Tarefa {
         if ($resultado) {
             $tarefas = array();
             foreach ($resultado as $item) {
-                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
+                $tarefa = new Tarefas($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
                 array_push($tarefas, $tarefa);
             }
             return $tarefas;
@@ -61,7 +61,7 @@ class Tarefa {
         if ($resultado) {
             $tarefas = array();
             foreach ($resultado as $item) {
-                $tarefa = new Tarefa($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
+                $tarefa = new Tarefas($item['conteudo'], $item['titulo'], $item['email'], $item['estado']);
                 array_push($tarefas, $tarefa);
             }
             return $tarefas;
@@ -80,7 +80,7 @@ class Tarefa {
         $resultado = $stm->fetch();
 
         if ($resultado) {
-            $tarefa = new Tarefa($resultado['conteudo'], $resultado['titulo'], $resultado['email'], $resultado['estado']);
+            $tarefa = new Tarefas($resultado['conteudo'], $resultado['titulo'], $resultado['email'], $resultado['estado']);
             return $tarefa;
         } else {
             return NULL;
