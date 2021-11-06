@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="../../../publico/estilo/login_register.css" rel="stylesheet">
+        <link href="../../../public/css/login_register.css" rel="stylesheet">
         <title>LOGIN</title>
     </head>
     <body>
@@ -12,7 +12,7 @@
             <main class="login_form">
                 <p class="main-title">Autenticar-se</p>
                 <form class="main-login_form" method="POST">
-                        <?php require 'app/visoes/alert.php' ?>
+                        <?php require 'app/view/commons/alert.php' ?>
                         <p for="email">E-mail</p>
                         <input type="email" id="email" name="email" placeholder="exemplo@email.com"/>
                         <p for="senhea">Senha</p>

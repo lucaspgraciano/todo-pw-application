@@ -4,8 +4,8 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="../../../publico/estilo/home.css" rel="stylesheet">
-		<script src="../../../publico/js/home.js"></script>
+		<link href="../../../public/css/home.css" rel="stylesheet">
+		<script src="../../../public/js/home.js"></script>
 		<title>HOME</title>
 	</head>
 	<body>
@@ -14,19 +14,19 @@
 			<header class="top-bar">
 				<section class="top-bar-search_bar">
 					<input type="text" placeholder="Buscar...">
-					<button><img src="../../../publico/imagens/loupe.png"></button>
+					<button><img src="../../../public/images/loupe.png"></button>
 				</section>
-				<section class="top-bar-alert"><?php require 'app/visoes/alert.php' ?></section>
+				<section class="top-bar-alert"><?php require 'app/view/commons/alert.php' ?></section>
 				<section>
 				<form method="POST" action="/logout">
 					<div class="top-bar-user_card-container">
-						<div class="top-bar-user_card_img"><img src=".../../../publico/imagens/user.png"></div>
+						<div class="top-bar-user_card_img"><img src=".../../../public/images/user.png"></div>
 						<div class="top-bar-user_card_info">
 							<p><?= $data[0]->nome ?></p>
 							<hr>
 							<p><?= $data[0]->email ?></p>
 						</div>
-						<button type="submit"><img src="../../../publico/imagens/exit.png"></button>
+						<button type="submit"><img src="../../../public/images/exit.png"></button>
 					</div>
 				</form>
 				</section>

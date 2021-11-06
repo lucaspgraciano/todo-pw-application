@@ -1,6 +1,6 @@
 <?php
 
-class Usuario {
+class Usuarios {
     private $email;
     private $senha;
     private $nome;
@@ -19,11 +19,11 @@ class Usuario {
         return $this->$campo = $valor;
     }
 
-    public function igual(string $email, string $senha) {
+    public function autenticarEmailSenha(string $email, string $senha) {
         return $this->email === $email && $this->senha === hash('sha256', $senha);
     }
 
-    public function salvar() {
+    public function salvarNovoUsuario() {
         $con = Database::getConnection();
 
         $stm = $con->prepare('INSERT INTO Usuarios (nome, email, senha) VALUES (:nome, :email, :senha)');
@@ -42,7 +42,7 @@ class Usuario {
         $resultado = $stm->fetch();
 
         if ($resultado) {
-            $usuario = new Usuario($resultado['email'], $resultado['senha'], $resultado['nome']);
+            $usuario = new Usuarios($resultado['email'], $resultado['senha'], $resultado['nome']);
             $usuario->senha = $resultado['senha'];
             return $usuario;
         } else {

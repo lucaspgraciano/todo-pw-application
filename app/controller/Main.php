@@ -1,11 +1,11 @@
 <?php
 
-require 'app/modelos/Usuarios.php';
-require 'Controlador.php';
-require 'app/modelos/Listas.php';
-require 'app/modelos/Tarefas.php';
+require 'app/model/Usuarios.php';
+require 'Controller.php';
+require 'app/model/Listas.php';
+require 'app/model/Tarefas.php';
 
-class LoginController extends Controller {
+class MainController extends Controller {
     private $loggedUser;
 
     function __construct() {
@@ -21,39 +21,18 @@ class LoginController extends Controller {
         }
     }
 
-    public function login() {
-        $usuario = Usuario::buscarUsuario($_POST['email']);
-
-        if ($usuario && $usuario->igual($_POST['email'], $_POST['senha'])) {
-            $_SESSION['user'] = $this->loggedUser = $usuario;
-            header('Location: /user/home');
-        } else {
-            header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário e/ou senha incorreta');
-        }
-    }
-
     public function cadastrarIndex() {
         $this->view('user/register');
     }
 
-    public function cadastrar() {
-        try {
-            $user = new Usuario($_POST['email'], $_POST['senha'], $_POST['nome']);
-            $user->salvar();
-            header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário cadastrado com sucesso');
-        } catch (Throwable $th) {
-            header('Location: /register?email=' . $_POST['email'] . '&mensagem=Email já cadastrado');
-        }
-    }
-
-    public function home() {
+    public function homeIndex() {
         if (!$this->loggedUser) {
             header('Location: /login?acao=entrar&mensagem=Você precisa se identificar primeiro');
             return;
         }
         $data = array();
-        $listas = Lista::buscarListaPorUsuario($this->loggedUser->email);
-        $tarefas = Tarefa::buscarTarefasPorUsuario($this->loggedUser->email);
+        $listas = Listas::buscarListaPorUsuario($this->loggedUser->email);
+        $tarefas = Tarefas::buscarTarefasPorUsuario($this->loggedUser->email);
         if (is_null($listas) && is_null($tarefas)) {
             array_push($data, $this->loggedUser);
         } else if (!is_null($listas) && is_null($tarefas)) {
@@ -66,7 +45,29 @@ class LoginController extends Controller {
         $this->view('user/home', $data);
     }
 
-    public function sair() {
+    public function logarUsuario() {
+        $usuario = Usuarios::buscarUsuario($_POST['email']);
+        if (is_null($usuario)) {
+            header('Location: /login?mensagem=Usuário não cadastrado');
+        } elseif ($usuario && $usuario->autenticarEmailSenha($_POST['email'], $_POST['senha'])) {
+            $_SESSION['user'] = $this->loggedUser = $usuario;
+            header('Location: /user/home');
+        } else {
+            header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário e/ou senha incorreta');
+        }
+    }
+
+    public function cadastrarNovoUsuario() {
+        try {
+            $user = new Usuarios($_POST['email'], $_POST['senha'], $_POST['nome']);
+            $user->salvarNovoUsuario();
+            header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário cadastrado com sucesso');
+        } catch (Throwable $th) {
+            header('Location: /register?email=' . $_POST['email'] . '&mensagem=Email já cadastrado');
+        }
+    }
+
+    public function deslogarUsuario() {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
@@ -79,20 +80,20 @@ class LoginController extends Controller {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
-        } else if (Lista::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email)) {
+        } else if (Listas::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem=Lista "'. $_POST['titulo'] .'" já existe');
         } else {
-            $lista = new Lista($_POST['titulo'], $this->loggedUser->email);
+            $lista = new Listas($_POST['titulo'], $this->loggedUser->email);
             $lista->salvarNovaLista();
             header('Location: /user/home');
         }
     }
 
     public function removerLista() {
-        $lista = Lista::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email);
+        $lista = Listas::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email);
         try {
             $lista->apagarLista($_POST['titulo'], $this->loggedUser->email);
-            Tarefa::apagarTarefasPorLista($_POST['titulo'], $this->loggedUser->email);
+            Tarefas::apagarTarefasPorLista($_POST['titulo'], $this->loggedUser->email);
             header('Location: /user/home?mensagem=Lista deletada com sucesso');
         } catch (PDOException $erro) {
             header('Location: /user/home?mensagem=Erro ao deletar a lista "'. $_POST['titulo'] . '"');
@@ -102,17 +103,17 @@ class LoginController extends Controller {
     public function criarTarefa() {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
-        } else if (Tarefa::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email)) {
+        } else if (Tarefas::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem=A tarefa "' . $_POST['conteudo'] . '" já está cadastrada na lista "' . $_POST['titulo'] . '"');
         } else {
-            $tarefa = new Tarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+            $tarefa = new Tarefas($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
             $tarefa->salvarNovaTarefa();
             header('Location: /user/home');
         }
     }
 
     public function removerTarefa() {
-        $tarefa = Tarefa::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+        $tarefa = Tarefas::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
         try {
             $tarefa->apagarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
             header('Location: /user/home?mensagem=Tarefa deletada com sucesso');
@@ -124,7 +125,7 @@ class LoginController extends Controller {
     public function atualizarTarefa() {
         var_dump($_POST);
         try {
-            Tarefa::atualizarEstadoDaTarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email, $_POST['estado']);
+            Tarefas::atualizarEstadoDaTarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email, $_POST['estado']);
             header('Location: /user/home?mensagem=Tarefa atualizada com sucesso');
         } catch (PDOException $error) {
             header('Location: /user/home?mensagem=Erro ao atualizar a tarefa "'. $_POST['conteudo'] . '"');

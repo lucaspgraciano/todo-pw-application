@@ -1,6 +1,6 @@
 <?php
 
-class Lista {
+class Listas {
     private $titulo;
     private $email;
 
@@ -35,7 +35,7 @@ class Lista {
         if ($resultado) {
             $listas = array();
             foreach ($resultado as $item) {
-                $lista = new Lista($item['titulo'], $item['email']);
+                $lista = new Listas($item['titulo'], $item['email']);
                 array_push($listas, $lista);
             }
             return $listas;
@@ -53,7 +53,7 @@ class Lista {
         $resultado = $stm->fetch();
 
         if ($resultado) {
-            $lista = new Lista($resultado['titulo'], $resultado['email']);
+            $lista = new Listas($resultado['titulo'], $resultado['email']);
             return $lista;
         } else {
             return NULL;
