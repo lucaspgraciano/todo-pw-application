@@ -23,7 +23,6 @@ html, body{
 	width: 100%;
 }
 .top-bar-search_bar{
-	height: 50%;
 	border-radius: 0 15px 15px 0;
 	display: flex;
 	margin: 15px 0;
@@ -33,8 +32,8 @@ html, body{
 	height: 100%;
 	width: 300px;
 	border: none;
-	border-radius: 15px 0 0 15px;
-	padding-left: 10px;
+	border-radius: 50px 0 0 50px;
+	padding-left: 20px;
 	transition: 0.5s;
 	font-size: 1.4em;
 	outline: none;
@@ -44,7 +43,7 @@ html, body{
 	background-color: #fff;
 	height: calc(100% + 2px);
 	border: none;
-	border-radius: 0 15px 15px 0;
+	border-radius: 0 50px 50px 0;
 	padding: 0 10px;
 	transition: 0.5s;
 	width: 40px;
@@ -68,13 +67,12 @@ html, body{
 }
 .top-bar-user_card-container{
 	display: flex;
-	border-radius: 15px 0 0 15px;
 	margin-top: 4px;
 }
 .top-bar-user_card-container button{
 	cursor: pointer;
 	border: none;
-	background-color: #fff;
+	background-color: #5433FF;
 	border-radius: 5px;	
 	margin-top: 10px;
 	margin-right: 15px;
@@ -179,7 +177,7 @@ html, body{
 }
 
 .main-content-list_user-list section header{
-	background-color: #5E68D0;
+	background-color: #5433FF;
 	margin-top: 10px;
 	padding: 20px;
 	margin-right: 40px;
@@ -194,32 +192,45 @@ html, body{
 }
 .main-content-list_user-list section header div button{
 	float: right;
-	background-color: #32325D;
-	font-size: 1em;
+	background-color: #5433FF;
+	border-radius: 0;
 	height: 25px;
-	padding: 5px;
+	width: 40px;
+	padding: 0;
+	transition: 0.5s;
+	position: fixed;
+	margin-left: 200px;
+}
+.main-content-list_user-list section header div button:hover{
+	transform: scale(1.3, 1.3);
+	transition: 0.5s;
+}
+.main-content-list_user-list section form {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: flex;
+	
 }
 
 .main-content-list_user-list section form input {
 	height: 30px;
 	border: none;
 	outline: none;
+	border-radius: 50px 0 0 50px;
 	font-size: 1.2em;
 	padding-left: 10px;
-	margin-top: 10px;
 	margin-right: -1px;
 }
 
 .main-content-list_user-list section form button {
-	background-color: #5433FF;
-	color: #fff;
-	font-size: 1.2em;
+	background-color: #07f49e;
 	height: 32px;
-	padding-left: 29px;
-	padding-right: 29px;
+	width: 85px;
+	border-radius: 0 50px 50px 0;
 	cursor: pointer;
 	border: none;
-	margin-left: -5px;
+	margin-left: -3px;
+	padding-left: 10px;
 }
 
 .main-content-list_user-list section form button:hover {

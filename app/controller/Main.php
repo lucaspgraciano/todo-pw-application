@@ -80,6 +80,8 @@ class MainController extends Controller {
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
+        } else if (empty($_POST['titulo'])) {
+            header('Location: /user/home?mensagem=Título da lista deve ser preenchdio');
         } else if (Listas::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem=Lista "'. $_POST['titulo'] .'" já existe');
         } else {
