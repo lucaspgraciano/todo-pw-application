@@ -64,7 +64,6 @@ html, body{
 .top-bar-alert {
 	font-size: 1.4em;
 	font-weight: bold;
-	
 	color: white;
 }
 .top-bar-user_card-container{
@@ -114,8 +113,60 @@ html, body{
 	width: 80%;
 	border:0.1px solid #fff;
 }
-
-
+.home-no-task_bg-svg {
+	padding-top: 100px;
+    height: 400px;
+    z-index: 0;
+}
+.main-content-first_list {
+	padding-top: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	z-index: 1;
+}
+.main-content-first_list h1 {
+	font-size: 3em;
+}
+.main-content-first_list p {
+	font-size: 1.5em;
+}
+.main-content-first_list input {
+	background-color: #ECECEC;
+	color: #FFFFFF;
+	font-size: 2em;
+	margin-top: 50px;
+	border-radius: 50px;
+	padding-left: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	outline: none;
+	border: none;
+	transition: 0.5s;
+}
+.main-content-first_list input:focus{
+	background-color: #D0D0D0;
+	color: #1D1D1D;
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+.main-content-first_list button {
+	font-size: 2em;
+	cursor: pointer;
+	border-radius: 50px;
+	background-color: #5433FF;
+	color: #fff;
+	margin-top: 20px;
+	height: 54.44px;
+	width: 407.55px;
+	border: none;
+	transition: 0.5s;
+}
+.main-content-first_list button:hover {
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+	opacity: 0.8;
+}
 .main-content-list{
 	display: flex;
 	margin-left: 20px;
