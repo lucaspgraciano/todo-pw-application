@@ -11,7 +11,7 @@ html, body{
 }
 
 .top-bar-pai{
-	width:var(--bodywidth, 100%);
+	width: var(--bodywidth, 100%);
 }
 
 .top-bar{
@@ -19,9 +19,8 @@ html, body{
 	display: flex;
 	justify-content: space-between;
 	height: 70px;
-	position: sticky;
-	left:0;
-	width: calc(var(--vw, 1vw) * 100);
+	position: fixed;
+	width: 100%;
 }
 .top-bar-search_bar{
 	height: 50%;
@@ -115,11 +114,16 @@ html, body{
 	width: 80%;
 	border:0.1px solid #fff;
 }
+
+
 .main-content-list{
 	display: flex;
+	margin-left: 20px;
 }
 
 .main-content-list_user-list {
+	width: 400px;
+	margin-top: 80px;
 	display: flex;
 }
 
@@ -152,7 +156,7 @@ html, body{
 	font-size: 1.2em;
 	padding-left: 10px;
 	margin-top: 10px;
-	margin-right: 0;
+	margin-right: -1px;
 }
 
 .main-content-list_user-list section form button {
@@ -160,8 +164,8 @@ html, body{
 	color: #fff;
 	font-size: 1.2em;
 	height: 32px;
-	padding-left: 25px;
-	padding-right: 25px;
+	padding-left: 29px;
+	padding-right: 29px;
 	cursor: pointer;
 	border: none;
 	margin-left: -5px;
@@ -177,9 +181,8 @@ html, body{
 	transition: 0.1s;
 }
 .main-content-list_user-list section main {
-	width: 350px;
-	padding: 10px;
 	display: block;
+	width: 400px;
 }
 
 .main-content-list_user-list section main label {
