@@ -26,6 +26,7 @@
                     <p>Já possui conta? <a href="/login">Acesse agora</a></p>
                 </div>
             </main>
+            <img src="../../../public/images/laying.svg" class="register_bg-svg">
         </div>
     </body>
 </html>

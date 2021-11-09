@@ -24,6 +24,7 @@
                     <p>Não tem cadastro? <a href="/register">Cadastre-se</a></p>
                 </div>
             </main>
+            <img src="../../../public/images/selfie.svg" class="login_bg-svg">
         </div>
     </body>
 </html>
