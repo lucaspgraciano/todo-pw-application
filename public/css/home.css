@@ -18,17 +18,17 @@ html, body{
 	background-color: #5433FF;
 	display: flex;
 	justify-content: space-between;
-	height: 7.5%;
+	height: 70px;
 	position: sticky;
 	left:0;
 	width: calc(var(--vw, 1vw) * 100);
 }
 .top-bar-search_bar{
-	background-color: #2D9BFF;
+	height: 50%;
 	border-radius: 0 15px 15px 0;
 	display: flex;
 	margin: 15px 0;
-	padding: 10px;
+	margin-left: 15px;
 }
 .top-bar-search_bar input{
 	height: 100%;
@@ -42,7 +42,7 @@ html, body{
 }
 .top-bar-search_bar button{
 	cursor: pointer;
-	background-color: white;
+	background-color: #fff;
 	height: calc(100% + 2px);
 	border: none;
 	border-radius: 0 15px 15px 0;
@@ -63,24 +63,26 @@ html, body{
 	width: 100%;
 }
 .top-bar-alert {
-	font-size: 2em;
+	font-size: 1.4em;
 	font-weight: bold;
+	
 	color: white;
 }
 .top-bar-user_card-container{
-	margin: 15px 0;
-	padding: 10px;
-	background-color: #2D9BFF;
 	display: flex;
 	border-radius: 15px 0 0 15px;
-	padding: 10px;
+	margin-top: 4px;
 }
 .top-bar-user_card-container button{
 	cursor: pointer;
 	border: none;
-	background-color: white;
+	background-color: #fff;
 	border-radius: 5px;	
+	margin-top: 10px;
+	margin-right: 15px;
 	padding: 0 15px;
+	height: 40px;
+	width: 40px;
 }
 .top-bar-user_card-container button:hover{
 	transform: scale(1.1, 1.1);
@@ -111,37 +113,93 @@ html, body{
 }
 .top-bar-user_card_info hr{
 	width: 80%;
-	border:1px solid #5433FF;
-	border-radius: 15px;
-}
-.main-content{
-	padding:0 50px;
-	height: calc(100vh - 112px);
+	border:0.1px solid #fff;
 }
 .main-content-list{
 	display: flex;
 }
-.main-content-list div{
-	width: 27.5%;
-	height: 100%;
-	background-color: #1cc6ff;
-	border-radius: 0 0 15px 15px;
-	padding: 20px;
+
+.main-content-list_user-list {
 	display: flex;
-	flex-direction: column;
-	flex-shrink: 0;
 }
 
-.main-content-list_list{
-	margin-right: 100px;
-	justify-content: row;
-
+.main-content-list_user-list section header{
+	background-color: #5E68D0;
+	margin-top: 10px;
+	padding: 20px;
+	margin-right: 40px;
 }
-.main-content-list_list div{
-	background-color: lightblue;
-	justify-content: center;
-	border-radius: 15px;
-	width: 90%;
+.main-content-list_user-list label{
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #fff;
+}
+.main-content-list_user-list section header div{
+	display: inline;
+}
+.main-content-list_user-list section header div button{
+	float: right;
+	background-color: #32325D;
+	font-size: 1em;
+	height: 25px;
+	padding: 5px;
+}
+
+.main-content-list_user-list section form input {
+	height: 30px;
+	border: none;
+	outline: none;
+	font-size: 1.2em;
+	padding-left: 10px;
+	margin-top: 10px;
+	margin-right: 0;
+}
+
+.main-content-list_user-list section form button {
+	background-color: #5433FF;
+	color: #fff;
+	font-size: 1.2em;
+	height: 32px;
+	padding-left: 25px;
+	padding-right: 25px;
+	cursor: pointer;
+	border: none;
+	margin-left: -5px;
+}
+
+.main-content-list_user-list section form button:hover {
+	transform: scale(1.1, 1.1);
+	transition: 0.5s;
+}
+
+.main-content-list_user-list section form button:active {
+	transform: scale(0.9, 0.9);
+	transition: 0.1s;
+}
+.main-content-list_user-list section main {
+	width: 350px;
+	padding: 10px;
+	display: block;
+}
+
+.main-content-list_user-list section main label {
+	background-color: #669BBC;
+	font-size: 1em;
+	color: black;
+}
+.main-content-list_user-list section main label:hover {
+	cursor: pointer;
+	background-color: #003049; 
+}
+.main-content-list_user-list section main div button {
+	float: right;
+	background-color: #32325D;
+}
+.main-content-list_user-list section main section button {
+	background-color: #669BBC;
+}
+.main-content-list_user-list section main form div button:hover {
+	transform: none;
 }
 .hidden {
 	display:none;
