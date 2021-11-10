@@ -7,6 +7,8 @@ require 'app/model/Tarefas.php';
 
 class MainController extends Controller {
     private $loggedUser;
+    private $tamanho_minimo_senha = 8;
+    private $tamanho_maximo_da_string = 20;
 
     function __construct() {
         session_start();
@@ -59,9 +61,17 @@ class MainController extends Controller {
 
     public function cadastrarNovoUsuario() {
         try {
-            $user = new Usuarios($_POST['email'], $_POST['senha'], $_POST['nome']);
-            $user->salvarNovoUsuario();
-            header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário cadastrado com sucesso');
+            $nome = trim($_POST['nome']);
+            $senha = $_POST['senha'];
+            if (empty($nome)){
+                header('Location: /register?email=' . $_POST['email'] . '&mensagem=Nome não pode ser vázio');
+            } else if (strlen($senha) < $this->tamanho_minimo_senha) {
+                header('Location: /register?email=' . $_POST['email'] . '&mensagem=Senha deve possuir ao menos 8 caracters');
+            } else {
+                $user = new Usuarios($_POST['email'], $senha, $nome);
+                $user->salvarNovoUsuario();
+                header('Location: /login?email=' . $_POST['email'] . '&mensagem=Usuário cadastrado com sucesso');
+            }
         } catch (Throwable $th) {
             header('Location: /register?email=' . $_POST['email'] . '&mensagem=Email já cadastrado');
         }
@@ -77,15 +87,18 @@ class MainController extends Controller {
     }
 
     public function criarLista() {
+        $titulo = trim($_POST['titulo']);
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
-        } else if (empty($_POST['titulo'])) {
+        } else if (strlen($titulo) > $this->tamanho_maximo_da_string) {
+            header('Location: /user/home?mensagem=Título da lista não deve ultrapassar' . $this->tamanho_maximo_da_string . 'caracteres');
+        } else if (empty($titulo)) {
             header('Location: /user/home?mensagem=Título da lista deve ser preenchdio');
-        } else if (Listas::buscarListaEspecifica($_POST['titulo'], $this->loggedUser->email)) {
-            header('Location: /user/home?mensagem=Lista "'. $_POST['titulo'] .'" já existe');
+        } else if (Listas::buscarListaEspecifica($titulo, $this->loggedUser->email)) {
+            header('Location: /user/home?mensagem=Lista "'. $titulo .'" já existe');
         } else {
-            $lista = new Listas($_POST['titulo'], $this->loggedUser->email);
+            $lista = new Listas($titulo, $this->loggedUser->email);
             $lista->salvarNovaLista();
             header('Location: /user/home');
         }
@@ -103,12 +116,17 @@ class MainController extends Controller {
     }
 
     public function criarTarefa() {
+        $conteudo = trim($_POST['conteudo']);
         if (!$this->loggedUser) {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
-        } else if (Tarefas::buscarTarefaEspecifica($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email)) {
-            header('Location: /user/home?mensagem=A tarefa "' . $_POST['conteudo'] . '" já está cadastrada na lista "' . $_POST['titulo'] . '"');
+        } else if (strlen($conteudo) > $this->tamanho_maximo_da_string) {
+            header('Location: /user/home?mensagem=A descrição da tarefa não deve ultrapassar '. $this->tamanho_maximo_da_string .' caracteres');
+        } else if (empty($conteudo)) {
+            header('Location: /user/home?mensagem=Conteúdo da tarefa deve ser preenchdio');
+        } else if (Tarefas::buscarTarefaEspecifica($conteudo, $_POST['titulo'], $this->loggedUser->email)) {
+            header('Location: /user/home?mensagem=A tarefa "' . $conteudo . '" já está cadastrada na lista "' . $_POST['titulo'] . '"');
         } else {
-            $tarefa = new Tarefas($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email);
+            $tarefa = new Tarefas($conteudo, $_POST['titulo'], $this->loggedUser->email);
             $tarefa->salvarNovaTarefa();
             header('Location: /user/home');
         }
