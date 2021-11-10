@@ -4,9 +4,9 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="../../../public/images/favicon.ico"/>
 		<link href="../../../public/css/home.css" rel="stylesheet">
-		<script src="../../../public/js/home.js"></script>
-		<title>HOME</title>
+		<title>Todo App | <?= $data[0]->nome ?></title>
 	</head>
 	<body>
 		<div class="container">
@@ -57,18 +57,19 @@
 										<button type="submit"><img src="../../../public/images/add.svg"></button>
 									</form>
 								</header>
+								<img src="../../../public/images/clumsy.svg" id="image-bg-home">
 							</section>
 						</div>
 						<div class="main-content-list_user-list">
 							<?php foreach ($data[1] as $lista) { ?>
 								<section>
 									<header>
-										<div>
+										<div id="title_list">
 											<form action="/user/home/remove_list" method="POST">
 												<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
-												<div>
+												<div id="title_task">
 													<label><?= $lista->titulo ?></label>
-													<button type="submit"><img src="../../../public/images/delete.svg"></button>
+													<button id="delete-task" type="submit"><img src="../../../public/images/delete.svg"></button>
 												</div>
 											</form>
 										</div>
@@ -83,22 +84,24 @@
 										<?php } else {
 											foreach ($data[2] as $tarefa) { 
 												if ($tarefa->titulo == $lista->titulo) { ?>
-													<div>
+												<div class="user-tasks">
+													<div class="user-list-conteudo">
 														<form action="/user/home/remove_task" method="POST">
 															<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
 															<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
-															<label><?= $tarefa->conteudo ?></labe>
-															<button type="submit"> Exluir </button>
+															<label id="user-list-conteudo-label"><?= $tarefa->conteudo ?></label>
+															<button id="user-list-conteudo-btn" type="submit"><img src="../../../public/images/delete.svg"></button>
 														</form>
 													</div>
-													<section>
+													<div class="user-list-estado">
 														<form action="/user/home/update_task" method="POST">
 															<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
 															<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
 															<input name="estado" id="estado" type="hidden" value="<?= $tarefa->estado ?>">
-															<button type="submit"><?= $tarefa->estado ?></button>
+															<button id="user-list-estado-btn" type="submit"><?= $tarefa->estado ?></button>
 														</form>
-													</section>
+													</div>
+												</div>
 												<?php } ?>
 											<?php } ?>
 										<?php } ?>

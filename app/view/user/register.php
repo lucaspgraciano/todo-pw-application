@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../../../public/images/favicon.ico"/>
         <link href="../../../public/css/login_register.css" rel="stylesheet">
-        <title>REGISTRO</title>
+        <title>Todo App | Cadastre-se</title>
     </head>
     <body>
         <div class="container">
@@ -18,7 +19,7 @@
                         <p for="email">E-mail</p>
                         <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
                         <p for="senha">Senha</p>
-                        <input type="password" id="password" name="senha" placeholder="********" required>
+                        <input type="password" id="password" name="senha" placeholder="**" required>
                         <br>
                         <button type="submit">Entrar</button>
                 </form>
