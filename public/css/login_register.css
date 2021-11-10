@@ -13,14 +13,29 @@ html, body{
     justify-content: center;
     align-items: center;
 }
-
+.login_bg-svg {
+    position: fixed;
+    padding-left: 1250px;
+    padding-top: 300px;
+    height: 500px;
+    z-index: 0;
+}
+.register_bg-svg {
+    width: 500px;
+    height: 500px;
+    position: fixed; 
+    padding-right: 1200px;
+    padding-top: 600px;
+    z-index: 0;
+}
 .login_form{
-    background-color: white;
+    background-color: #e9ecef;
     display: block;
-    border: 1.5px solid #e9ecef;
+    border: 1.5px solid #ced4da;
     border-radius: 10px;
     padding: 20px;
     width: auto;
+    z-index: 1;
 }
 .main-title{
     font-size: 2em;
@@ -34,12 +49,14 @@ html, body{
 .main-login_form input{
     font-size: 1em;
     padding: 5px;
-    border: 1px solid grey;
+    border: 1px solid #ced4da;
     border-radius: 5px;
     width: calc(100% - 12px);
     height: 20px;
+    outline: none;
 }
 .main-login_form button{
+    cursor: pointer;
     margin-top: 20px;
     height: 30px;
     width: 50%;
@@ -55,6 +72,13 @@ html, body{
 }
 .main-login_form button:hover{
     background-color: #6446FF;
+    transform: scale(1.1, 1.1);
+	transition: 0.25s;
+}
+.main-login_form button:active{
+    background-color: #5433C8;
+    transform: scale(0.9, 0.9);
+	transition: 0.1s;
 }
 .main-login_register_link{
     text-align: center;
@@ -68,4 +92,3 @@ html, body{
 .main-login_register_link a:hover{
     color: #2D9BFF;
 }
-

@@ -4,85 +4,113 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="../../../public/images/favicon.ico"/>
 		<link href="../../../public/css/home.css" rel="stylesheet">
-		<script src="../../../public/js/home.js"></script>
-		<title>HOME</title>
+		<title>Todo App | <?= $data[0]->nome ?></title>
 	</head>
 	<body>
 		<div class="container">
 			<div class="top-bar-pai">
-			<header class="top-bar">
-				<section class="top-bar-search_bar">
-					<input type="text" placeholder="Buscar...">
-					<button><img src="../../../public/images/loupe.png"></button>
-				</section>
-				<section class="top-bar-alert"><?php require 'app/view/commons/alert.php' ?></section>
-				<section>
-				<form method="POST" action="/logout">
-					<div class="top-bar-user_card-container">
-						<div class="top-bar-user_card_img"><img src=".../../../public/images/user.png"></div>
-						<div class="top-bar-user_card_info">
-							<p><?= $data[0]->nome ?></p>
-							<hr>
-							<p><?= $data[0]->email ?></p>
-						</div>
-						<button type="submit"><img src="../../../public/images/exit.png"></button>
-					</div>
-				</form>
-				</section>
-			</header>
+				<header class="top-bar">
+					<section class="top-bar-search_bar">
+						<input type="text" placeholder="Buscar...">
+						<button>
+							<img src="../../../public/images/search.svg">
+						</button>
+					</section>
+					<section class="top-bar-alert">
+						<?php require 'app/view/commons/alert.php' ?>
+					</section>
+					<section>
+						<form method="POST" action="/logout">
+							<div class="top-bar-user_card-container">
+								<div class="top-bar-user_card_info">
+									<p><?= $data[0]->nome ?></p>
+									<hr>
+									<p><?= $data[0]->email ?></p>
+								</div>
+								<button type="submit"><img src="../../../public/images/logout.svg"></button>
+							</div>
+						</form>
+					</section>
+				</header>
 			</div>
 			<main class="main-content">
-				<section id="Listas" class="main-content-list">
-					<div class="main-content-list_list">
-						<form action="/user/home/new_list" method="POST">
-							<label for="titulo">Título da Lista</label>
-							<input name="titulo" id="titulo" type="text" placeholder="Exemplo">
-							<button type="submit">ADICIONAR LISTA</button>
-						</form>
-					</div>
-					<?php if (is_null($data[1]) || count($data[1]) === 0) { ?>
-					<?php } else {
-						foreach ($data[1] as $lista) { ?>
-							<div class="main-content-list_list">
-								<div>
-									<form action="/user/home/remove_list" method="POST">
-										<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
-										<button type="submit"> APAGAR LISTA </button>
-										<h1><?= $lista->titulo ?></h1>	
+				<?php if (is_null($data[1]) || count($data[1]) === 0) { ?>
+					<form action="/user/home/new_list" method="POST">
+						<div class="main-content-first_list">
+							<h1>Ops, não encontramos nenhuma lista em seu usuário</h1>
+							<p> Vamos começar! Por favor, insira o título desejado para sua lista e clique em adicionar</p>
+							<input name="titulo" id="titulo" type="text" placeholder="Lista...">
+							<button type="submit">Adicionar</button>
+							<img src="../../../public/images/reading.svg" class="home-no-task_bg-svg">
+						</div>
+					</form>
+				<?php } else { ?>
+					<section id="Listas" class="main-content-list">
+						<div class="main-content-list_user-list">
+							<section>
+								<header>
+									<label>Criar nova lista</label>
+									<form action="/user/home/new_list" method="POST">
+										<input name="titulo" id="titulo" type="text" placeholder="Lista...">
+										<button type="submit"><img src="../../../public/images/add.svg"></button>
 									</form>
-									<?php if (is_null($data[2]) || count($data[2]) === 0) { ?>
-									<?php } else {
-										foreach ($data[2] as $tarefa) { 
-											if ($tarefa->titulo == $lista->titulo) { ?>
-												<strong><?= $tarefa->conteudo ?></strong><p><?= $tarefa->estado ?></p>
-													
-													<form action="/user/home/remove_task" method="POST">
-														<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
-														<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
-														<button type="submit"> APAGAR TAREFA </button>
-													</form>
-													<form action="/user/home/update_task" method="POST">
-														<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
-														<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
-														<input name="estado" id="estado" type="hidden" value="<?= $tarefa->estado ?>">
-														<button type="submit"> ATUALIZAR TAREFA </button>
-													</form>
-											<?php } else { ?>
+								</header>
+								<img src="../../../public/images/clumsy.svg" id="image-bg-home">
+							</section>
+						</div>
+						<div class="main-content-list_user-list">
+							<?php foreach ($data[1] as $lista) { ?>
+								<section>
+									<header>
+										<div id="title_list">
+											<form action="/user/home/remove_list" method="POST">
+												<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+												<div id="title_task">
+													<label><?= $lista->titulo ?></label>
+													<button id="delete-task" type="submit"><img src="../../../public/images/delete.svg"></button>
+												</div>
+											</form>
+										</div>
+										<form action="/user/home/add_task" method="POST">
+											<input name="conteudo" id="conteudo" type="text" placeholder="Tarefa...">
+											<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+											<button type="submit"><img src="../../../public/images/add.svg"></button>
+										</form>
+									</header>
+									<main>
+										<?php if (is_null($data[2]) || count($data[2]) === 0) { ?>
+										<?php } else {
+											foreach ($data[2] as $tarefa) { 
+												if ($tarefa->titulo == $lista->titulo) { ?>
+												<div class="user-tasks">
+													<div class="user-list-conteudo">
+														<form action="/user/home/remove_task" method="POST">
+															<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
+															<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
+															<label id="user-list-conteudo-label"><?= $tarefa->conteudo ?></label>
+															<button id="user-list-conteudo-btn" type="submit"><img src="../../../public/images/delete.svg"></button>
+														</form>
+													</div>
+													<div class="user-list-estado">
+														<form action="/user/home/update_task" method="POST">
+															<input name="conteudo" id="conteudo" type="hidden" value="<?= $tarefa->conteudo ?>">
+															<input name="titulo" id="titulo" type="hidden" value="<?= $tarefa->titulo ?>">
+															<input name="estado" id="estado" type="hidden" value="<?= $tarefa->estado ?>">
+															<button id="user-list-estado-btn" type="submit"><?= $tarefa->estado ?></button>
+														</form>
+													</div>
+												</div>
+												<?php } ?>
 											<?php } ?>
 										<?php } ?>
-									<?php } ?>
-								</div>
-								<form action="/user/home/add_task" method="POST">
-									<label for="conteudo"> Tarefa</label>
-									<input name="conteudo" id="conteudo" type="text" placeholder="Exemplo">
-									<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
-									<button type="submit">ADICIONAR TAREFA</button>
-								</form>
-							</div>
-						<?php } ?>
-					<?php } ?>
-				</section>
+									</main>
+								</section>
+							<?php } ?>
+						</div>
+					</section> 
+				<?php } ?>
 			</main>
 		</div>
 	</body>
