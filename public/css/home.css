@@ -2,12 +2,12 @@ html, body{
     margin: 0;
     padding: 0;
     font-size: 15px;
-    background-color: #f8f9fa;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     
 }
 .container{
 	height: 100%;
+	z-index: inherit;
 }
 
 .top-bar-pai{
@@ -167,39 +167,50 @@ html, body{
 }
 .main-content-list{
 	display: flex;
-	margin-left: 20px;
 }
 
 .main-content-list_user-list {
 	width: 400px;
 	margin-top: 80px;
 	display: flex;
+	margin-left: 10px;
 }
 
 .main-content-list_user-list section header{
 	background-color: #5433FF;
-	margin-top: 10px;
-	padding: 20px;
-	margin-right: 40px;
+	padding: 30px;
+}
+.main-content {
+	margin-right: 10px;
+}
+#title_task {
+	display: inline;
+	width: 100%;
+}
+#delete-task {
+	float: right;
+	padding-right: 20px;
+}
+.main-content-list_user-list section {
+	margin-right: 50px;
+
 }
 .main-content-list_user-list label{
 	font-size: 1.5em;
 	font-weight: bold;
 	color: #fff;
+	width: 100%;
 }
 .main-content-list_user-list section header div{
 	display: inline;
+	margin-bottom: 20px;
 }
 .main-content-list_user-list section header div button{
-	float: right;
 	background-color: #5433FF;
 	border-radius: 0;
-	height: 25px;
-	width: 40px;
+	width: 0px;
 	padding: 0;
 	transition: 0.5s;
-	position: fixed;
-	margin-left: 200px;
 }
 .main-content-list_user-list section header div button:hover{
 	transform: scale(1.3, 1.3);
@@ -209,7 +220,6 @@ html, body{
 	margin-top: 10px;
 	margin-bottom: 10px;
 	display: flex;
-	
 }
 
 .main-content-list_user-list section form input {
@@ -237,34 +247,67 @@ html, body{
 	transform: scale(1.1, 1.1);
 	transition: 0.5s;
 }
-
 .main-content-list_user-list section form button:active {
 	transform: scale(0.9, 0.9);
 	transition: 0.1s;
 }
-.main-content-list_user-list section main {
-	display: block;
-	width: 400px;
+.user-tasks {
+	display: inline-flexbox;
+}
+.user-list-conteudo {
+	margin-top: -10px;
+}
+.user-list-estado{
+	margin-top: -10px;
+	padding-left: 3px;
+}
+#user-list-conteudo-label {
+	padding-left: 20px;
+	margin: 0;
+	background-color: #949494;
+	width: 100%;
+	transition: 0.3s;
 }
 
-.main-content-list_user-list section main label {
-	background-color: #669BBC;
-	font-size: 1em;
-	color: black;
-}
-.main-content-list_user-list section main label:hover {
-	cursor: pointer;
-	background-color: #003049; 
-}
-.main-content-list_user-list section main div button {
-	float: right;
-	background-color: #32325D;
-}
-.main-content-list_user-list section main section button {
-	background-color: #669BBC;
-}
-.main-content-list_user-list section main form div button:hover {
+#user-list-conteudo-label:hover{
+	background-color: #D6D6D6;
+	color: #1D1D1D;
 	transform: none;
+	transition: 0.3s;
+}
+#user-list-conteudo-btn {
+	background-color: #FA3F4F;
+	border-radius: 0px;
+	width: 100px;
+	float: inline-end;
+	transition: 0.3s;
+}
+#user-list-conteudo-btn:hover {
+	background-color: #F40010;
+	transition: 0.3s;
+	transform: none;
+}
+#user-list-estado-btn {
+	font-weight: 0;
+	background-color: #ECECEC;
+	border-radius: 0px;
+	width: 104%;
+	text-align: justify;
+	padding-left: 20px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+#user-list-estado-btn:hover{
+	background-color: #C0C0C0;
+	transform: none;
+}
+
+#image-bg-home {
+	width: 600px;
+	position: fixed;
+	margin-top: 230px;
+	margin-left: 30px;
+	z-index: -1;
 }
 .hidden {
 	display:none;
