@@ -8,7 +8,7 @@ require 'app/model/Tarefas.php';
 class MainController extends Controller {
     private $loggedUser;
     private $tamanho_minimo_senha = 8;
-    private $tamanho_maximo_da_string = 20;
+    private $tamanho_maximo_da_string = 18;
 
     function __construct() {
         session_start();
@@ -45,6 +45,26 @@ class MainController extends Controller {
             array_push($data,$this->loggedUser, $listas, $tarefas);
         }
         $this->view('user/home', $data);
+    }
+
+    public function publicIndex() {
+        if (!$this->loggedUser) {
+            header('Location: /login?acao=entrar&mensagem=Você precisa se identificar primeiro');
+            return;
+        }
+        $data = array();
+        $listas = Listas::buscarListaPublica();
+        $tarefas = Tarefas::buscarTarefaPublic();
+        if (is_null($listas) && is_null($tarefas)) {
+            array_push($data, $this->loggedUser);
+        } else if (!is_null($listas) && is_null($tarefas)) {
+            $listas = array_reverse($listas);
+            array_push($data,$this->loggedUser, $listas);
+        } else {
+            $listas = array_reverse($listas);
+            array_push($data,$this->loggedUser, $listas, $tarefas);
+        }
+        $this->view('user/public', $data);
     }
 
     public function logarUsuario() {
@@ -92,7 +112,7 @@ class MainController extends Controller {
             header('Location: /login?mensagem=Você precisa se identificar primeiro');
             return;
         } else if (strlen($titulo) > $this->tamanho_maximo_da_string) {
-            header('Location: /user/home?mensagem=Título da lista não deve ultrapassar' . $this->tamanho_maximo_da_string . 'caracteres');
+            header('Location: /user/home?mensagem=Título da lista não deve ultrapassar ' . $this->tamanho_maximo_da_string . ' caracteres');
         } else if (empty($titulo)) {
             header('Location: /user/home?mensagem=Título da lista deve ser preenchdio');
         } else if (Listas::buscarListaEspecifica($titulo, $this->loggedUser->email)) {
@@ -126,7 +146,7 @@ class MainController extends Controller {
         } else if (Tarefas::buscarTarefaEspecifica($conteudo, $_POST['titulo'], $this->loggedUser->email)) {
             header('Location: /user/home?mensagem=A tarefa "' . $conteudo . '" já está cadastrada na lista "' . $_POST['titulo'] . '"');
         } else {
-            $tarefa = new Tarefas($conteudo, $_POST['titulo'], $this->loggedUser->email);
+            $tarefa = new Tarefas($conteudo, $_POST['titulo'], $this->loggedUser->email, "Em andamento", $_POST['visibilidade']);
             $tarefa->salvarNovaTarefa();
             header('Location: /user/home');
         }
@@ -143,12 +163,25 @@ class MainController extends Controller {
     }
 
     public function atualizarTarefa() {
-        var_dump($_POST);
         try {
             Tarefas::atualizarEstadoDaTarefa($_POST['conteudo'], $_POST['titulo'], $this->loggedUser->email, $_POST['estado']);
             header('Location: /user/home?mensagem=Tarefa atualizada com sucesso');
         } catch (PDOException $error) {
             header('Location: /user/home?mensagem=Erro ao atualizar a tarefa "'. $_POST['conteudo'] . '"');
+        }
+    }
+
+    public function atualizarLista() {
+        try {
+            Listas::atualizarVisibilidade($_POST['titulo'],  $this->loggedUser->email,  $_POST['visibilidade']);
+            Tarefas::atualizarVisibilidadeDasTarefasPorLista($_POST['titulo'],  $this->loggedUser->email,  $_POST['visibilidade']);
+            if ($_POST['visibilidade'] == 0) {
+                header('Location: /user/home?mensagem=Sua lista "'. $_POST['titulo'] .'" agora é pública');
+            } else {
+                header('Location: /user/home?mensagem=Sua lista "'. $_POST['titulo'] .'" agora é privada');
+            }
+        } catch (PDOException $error) {
+            header('Location: /user/home?mensagem=Erro ao atualizar a lista "' . $_POST['titulo'] . '"');
         }
     }
 }

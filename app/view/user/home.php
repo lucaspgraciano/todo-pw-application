@@ -12,11 +12,25 @@
 		<div class="container">
 			<div class="top-bar-pai">
 				<header class="top-bar">
-					<section class="top-bar-search_bar">
+				<section class="top-bar-search_bar">
 						<input type="text" placeholder="Buscar...">
 						<button>
 							<img src="../../../public/images/search.svg">
 						</button>
+                        <section>
+                            <form method="GET" action="/user/home">
+                                <button id="nav-btns" type="submit">
+                                    <img src="../../../public/images/home.svg">
+                                </button>
+                            </form>
+					    </section>
+                        <section>
+                            <form method="GET" action="/user/public">
+                                <button id="nav-btns" type="submit">
+                                    <img src="../../../public/images/globe.svg">
+                                </button>
+                            </form>
+                        </section>
 					</section>
 					<section class="top-bar-alert">
 						<?php require 'app/view/commons/alert.php' ?>
@@ -65,17 +79,25 @@
 								<section>
 									<header>
 										<div id="title_list">
+											<label><?= $lista->titulo ?></label>
+											<form action="/user/home/update_task_visibility" method="POST">
+												<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+												<input name="visibilidade" id="visibilidade" type="hidden" value="<?= $lista->visibilidade ?>">
+												<?php if ($lista->visibilidade ==  0) {?>
+													<button id="update-task-private" type="submit"><img src="../../../public/images/private.svg"></button>
+												<?php } else { ?>
+													<button id="update-task-public" type="submit"><img src="../../../public/images/public.svg"></button>
+												<?php } ?>
+											</form>
 											<form action="/user/home/remove_list" method="POST">
 												<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
-												<div id="title_task">
-													<label><?= $lista->titulo ?></label>
-													<button id="delete-task" type="submit"><img src="../../../public/images/delete.svg"></button>
-												</div>
+												<button id="delete-task" type="submit"><img src="../../../public/images/delete.svg"></button>
 											</form>
 										</div>
 										<form action="/user/home/add_task" method="POST">
 											<input name="conteudo" id="conteudo" type="text" placeholder="Tarefa...">
 											<input name="titulo" id="titulo" type="hidden" value="<?= $lista->titulo ?>">
+											<input name="visibilidade" id="visibilidade" type="hidden" value="<?= $lista->visibilidade ?>">
 											<button type="submit"><img src="../../../public/images/add.svg"></button>
 										</form>
 									</header>

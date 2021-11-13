@@ -17,7 +17,7 @@
                         <p for="email">E-mail</p>
                         <input type="email" id="email" name="email" placeholder="exemplo@email.com"/>
                         <p for="senhea">Senha</p>
-                        <input type="password" id="password" name="senha" placeholder="**">
+                        <input type="password" id="password" name="senha" placeholder="*********">
                         <br>
                         <button type="submit">Entrar</button>
                 </form>

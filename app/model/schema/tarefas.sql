@@ -3,5 +3,6 @@ CREATE TABLE IF NOT EXISTS Tarefas (
                 titulo TEXT NOT NULL,
                 email TEXT NOT NULL,
                 estado TEXT NOT NULL,
+                visibilidade INTEGER NOT NULL,
                 PRIMARY KEY(conteudo, titulo, email)
             );

@@ -15,6 +15,7 @@ Route::add('/', fn () => $controller->loginIndex(), ['GET']);
 Route::add('/login', fn () => $controller->loginIndex(), ['GET']);
 Route::add('/register', fn () => $controller->cadastrarIndex(), ['GET']);
 Route::add('/user/home', fn () => $controller->homeIndex(), ['GET']);
+Route::add('/user/public', fn () => $controller->publicIndex(), ['GET']);
 
 Route::add('/login', fn ()  => $controller->logarUsuario(), ['POST']);
 Route::add('/register', fn ()  => $controller->cadastrarNovoUsuario(), ['POST']);
@@ -24,6 +25,7 @@ Route::add('/user/home/remove_list', fn () => $controller->removerLista(), ['POS
 Route::add('/user/home/add_task', fn () => $controller->criarTarefa(), ['POST']);
 Route::add('/user/home/remove_task', fn () => $controller->removerTarefa(), ['POST']);
 Route::add('/user/home/update_task', fn () => $controller->atualizarTarefa(), ['POST']);
+Route::add('/user/home/update_task_visibility', fn () => $controller->atualizarLista(), ['POST']);
 
 Route::add('/*', function () {
     http_response_code(404);
