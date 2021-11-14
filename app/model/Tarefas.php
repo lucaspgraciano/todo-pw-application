@@ -73,6 +73,26 @@ class Tarefas {
         }
     }
 
+    public static function buscarTarefaPorConteudoUsuario($conteudo, $email){
+        $con = Database::getConnection();
+        $stm = $con->prepare('SELECT conteudo, titulo, email, estado, visibilidade FROM Tarefas WHERE conteudo = :conteudo AND email = :email');
+        $stm->bindValue(':conteudo', $conteudo);
+        $stm->bindValue(':email', $email);
+        $stm->execute();
+        $resultado = $stm->fetchAll();
+
+        if ($resultado) {
+            $tarefas = array();
+            foreach ($resultado as $item) {
+                $tarefa = new Tarefas($item['conteudo'], $item['titulo'], $item['email'], $item['estado'], $item['visibilidade']);
+                array_push($tarefas, $tarefa);
+            }
+            return $tarefas;
+        } else {
+            return NULL;
+        }
+    }
+
     public static function buscarTarefaEspecifica($conteudo, $titulo, $email) {
         $con = Database::getConnection();
         $stm = $con->prepare('SELECT conteudo, titulo, email, estado, visibilidade FROM Tarefas WHERE conteudo = :conteudo AND titulo = :titulo AND email = :email');
@@ -90,7 +110,7 @@ class Tarefas {
         }
     }
 
-    public static function buscarTarefaPublic() {
+    public static function buscarTarefaPublica() {
         $visibilidade_publica = 1;
         $con = Database::getConnection();
         $stm = $con->prepare('SELECT conteudo, titulo, email, estado, visibilidade FROM Tarefas WHERE visibilidade = :visibilidade');

@@ -12,26 +12,33 @@
 		<div class="container">
 			<div class="top-bar-pai">
 				<header class="top-bar">
-				<section class="top-bar-search_bar">
-						<input type="text" placeholder="Buscar...">
-						<button>
-							<img src="../../../public/images/search.svg">
-						</button>
-                        <section>
-                            <form method="GET" action="/user/home">
-                                <button id="nav-btns" type="submit">
-                                    <img src="../../../public/images/home.svg">
-                                </button>
+					<section class="top-bar-search_bar">
+                            <form method="POST" action="/user/home/search">
+                                <input class="search-input" type="text" name="termo" id="termo" placeholder="Buscar...">
+                                <button><img src="../../../public/images/search.svg"></button>
                             </form>
-					    </section>
-                        <section>
-                            <form method="GET" action="/user/public">
+                            <section>
+                                <form method="GET" action="/user/home">
+                                    <button id="nav-btns" type="submit">
+                                        <img src="../../../public/images/home.svg">
+                                    </button>
+                                </form>
+                            </section>
+                            <section>
+                                <form method="GET" action="/user/public">
+                                    <button id="nav-btns" type="submit">
+                                        <img src="../../../public/images/globe.svg">
+                                    </button>
+                                </form>
+                            </section>
+                            <section>
+                                <form method="GET" action="/user/search">
                                 <button id="nav-btns" type="submit">
-                                    <img src="../../../public/images/globe.svg">
-                                </button>
-                            </form>
-                        </section>
-					</section>
+                                        <img src="../../../public/images/explore.svg">
+                                    </button>
+                                </form>
+                            </section>
+                    </section>
 					<section class="top-bar-alert">
 						<?php require 'app/view/commons/alert.php' ?>
 					</section>

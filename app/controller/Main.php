@@ -54,7 +54,7 @@ class MainController extends Controller {
         }
         $data = array();
         $listas = Listas::buscarListaPublica();
-        $tarefas = Tarefas::buscarTarefaPublic();
+        $tarefas = Tarefas::buscarTarefaPublica();
         if (is_null($listas) && is_null($tarefas)) {
             array_push($data, $this->loggedUser);
         } else if (!is_null($listas) && is_null($tarefas)) {
@@ -65,6 +65,17 @@ class MainController extends Controller {
             array_push($data,$this->loggedUser, $listas, $tarefas);
         }
         $this->view('user/public', $data);
+    }
+
+    public function searchIndex() {
+        if (!$this->loggedUser) {
+            header('Location: /login?acao=entrar&mensagem=Você precisa se identificar primeiro');
+            return;
+        } else {
+            $data = array();
+            array_push($data, $this->loggedUser);
+            $this->view('user/search', $data);
+        }
     }
 
     public function logarUsuario() {
@@ -183,5 +194,23 @@ class MainController extends Controller {
         } catch (PDOException $error) {
             header('Location: /user/home?mensagem=Erro ao atualizar a lista "' . $_POST['titulo'] . '"');
         }
+    }
+
+    public function busca() {
+        $data = array();
+        $termo = trim($_POST['termo']);
+        $listas_encontradas = Listas::buscarListaEspecifica($termo, $this->loggedUser->email);
+        // $tarefas_encontradas = Tarefas::buscarTarefaPorConteudoUsuario($_POST['termo'], $this->loggedUser->email);
+        if (strlen($termo) == 0) {
+            header('Location: /user/search?mensagem=O campo "Buscar" não deve ser vázio');
+        } else if (is_null($listas_encontradas)) {
+            array_push($data, $this->loggedUser);
+            header('Location: /user/search?mensagem=O termo "'. $termo .'" não foi encontrado');
+        } else if (!is_null($listas_encontradas)){
+            $lista = Listas::buscarListaEspecifica($listas_encontradas->titulo, $this->loggedUser->email);
+            $tarefas = Tarefas::buscarTarefaPorTituloUsuario($termo, $this->loggedUser->email);
+            array_push($data, $this->loggedUser, $lista, $tarefas);
+        }
+        $this->view('user/search', $data);
     }
 }
