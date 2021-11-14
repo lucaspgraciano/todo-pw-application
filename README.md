@@ -2,11 +2,15 @@
 Trabalho final da disciplina de Programação Web.
 
 ### Integrantes do grupo
-- Everton 
-- Fabio
-- Lucas
-- Milena
-- Paola
+- Everton;
+- Fabio;
+- Lucas;
+- Milena;
+- Paola;
+
+### Dependências 
+- PHP ^8.0.11;
+- SQLite ^3.36.0;
 
 ### Instalação
 Para iniciar o servidor, digite no terminal:
